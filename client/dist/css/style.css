@@ -6,3 +6,20 @@
   letter-spacing: 0.1em;
   line-height: 2em;
 }
+
+
+/* ==============================
+ * MOBILE SPECIFIC PARAMS
+ * ============================== */
+@media only screen and (max-width: 768px) {
+  .hero {
+    font-size: 3.5em;
+  }
+}
+
+/* ==============================
+ * Utilities
+ * ============================== */
+.shade {
+  background: rgba(0,0,0,0.5);
+}

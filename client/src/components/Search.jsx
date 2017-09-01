@@ -19,7 +19,7 @@ class Search extends React.Component {
                 <label htmlFor="location-search" className="">Where do you want to go?</label>
             </div>
           </div>
-          <div className="col-sm-2">
+          <div className="col-sm-2 text-center">
             <button type="button" className="btn btn-default" onClick={this.props.submitQuery}>Find!</button>
           </div>
         </div>

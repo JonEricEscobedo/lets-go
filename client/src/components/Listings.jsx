@@ -10,11 +10,22 @@ class Listings extends React.Component {
     }
   }
 
+
   render() {
+    const loading = this.props.markers.length === 0;    
+
     return (
       <div>
-        Inside Listings.jsx
-        <ListingsEntries />
+        <div className="list-group">
+          { loading 
+            ? <li className="list-group-item">Loading</li>
+            : <div>{this.props.results.map((result, idx) => {
+                return (
+                  <ListingsEntries result={result} highlight={this.props.highlight} marker={this.props.markers[idx]} index={idx} key={Math.random() * 1000} openWindow={this.props.openWindow}/>
+                );
+              })}</div>
+          }
+        </div>
       </div>
     );
   }
