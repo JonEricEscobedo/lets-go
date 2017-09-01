@@ -145,11 +145,13 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div className="container main">
-          <header>
+        <header className="gradient">
+          <div className="container">
             <h1 className="display-1 hero font-thinner">LET'S GO</h1>
-          </header>
+          </div>
+        </header>
 
+        <div className="container main">
           <nav>
             <Search 
               address={this.state.address}
