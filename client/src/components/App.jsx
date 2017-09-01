@@ -12,6 +12,7 @@ class App extends React.Component {
       results: [],
       markers: [],
       category: 'restaurant',
+      loading: false,
       highlight: null,
       coordinates: null
     };
@@ -29,11 +30,6 @@ class App extends React.Component {
     this.infowindow = null;
     this.map = null;
     this.markers = [];
-  }
-
-  // On component load, create map
-  componentDidMount() {
-    this.initializeMap();
   }
 
   // Detect text input changes in search box
@@ -55,11 +51,17 @@ class App extends React.Component {
       .then((results) => getLatLng(results[0]))
       .then(({ lat, lng }) => {
         console.log('Coordinates:', { lat, lng });
-        this.setState({ coordinates: [lat, lng]});
+        this.setState({ 
+          coordinates: [lat, lng],
+          loading: false
+        });
         this.initializeMap();
       })
       .catch((error) => {
         console.log('There was an error with the request', error);
+        this.setState({ 
+          loading: false
+        });
       });
   } // End of handleAddressSelect
 
@@ -159,14 +161,17 @@ class App extends React.Component {
         </nav>
 
         <section>
-          <Dashboard 
-            results={this.state.results}
-            highlight={this.state.highlight}
-            markers={this.state.markers}
-            openWindow={this.openWindow}
-            coordinates={this.state.coordinates}
-            className="sticky-map"
-          />
+          {this.state.loading ? <div><i className="fa fa-spinner fa-pulse fa-3x fa-fw Demo__spinner" /></div> : null}
+          {!this.state.loading && this.state.coordinates ?
+            <Dashboard 
+              results={this.state.results}
+              highlight={this.state.highlight}
+              markers={this.state.markers}
+              openWindow={this.openWindow}
+              coordinates={this.state.coordinates}
+              className="sticky-map"
+            />
+            : null}
         </section>
 
         <footer>
