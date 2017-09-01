@@ -17,7 +17,7 @@ const ListingsEntries = (props) => {
       <a 
         className="list-group-item list-group-item-action flex-column align-items-start" 
         style={props.highlight === props.result.id ? styles.highlight : null} 
-        onClick={ () => { props.openWindow(props.index); } }
+        onMouseOver={ () => { props.openWindow(props.index); } }
       >
         <div className="d-flex w-100 justify-content-between">
           <h5 className="mb-1">{props.result.name}</h5>

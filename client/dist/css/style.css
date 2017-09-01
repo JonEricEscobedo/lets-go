@@ -1,5 +1,5 @@
 /* ==============================
- * Landing page properties
+ * Header properties
  * ============================== */
 
 .hero {
@@ -7,6 +7,9 @@
   line-height: 2em;
 }
 
+/* ==============================
+ * GoogleMap properties
+ * ============================== */
 .sticky-map {
   position: fixed !important;
 }
@@ -15,6 +18,10 @@
   height: 50vh;
   width: 50vw;
 }
+
+/* ==============================
+ * Search (Autocomplete) properties
+ * ============================== */
 
 .autocomplete-container {
   border-bottom: honeydew;
@@ -30,9 +37,9 @@
   text-align: left;
 }
 
-.Demo__spinner {
-  color: #18bc9c;
-  font-size: 30px;
+.loading-spinner {
+  color: #2BBBAD;
+  font-size: 50px;
 }
 
 /* ==============================
@@ -45,6 +52,11 @@
   }
   .sticky-map {
     position: relative !important;
+  }
+
+  #g-map {
+    height: 50vh;
+    width: 90vw;
   }
 }
 

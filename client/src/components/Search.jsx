@@ -20,12 +20,12 @@ const Search = (props) => {
     value: props.address,
     onChange: props.handleAddressChange,
     autoFocus: true,
-    placeholder: 'Where do you want to go?',
+    placeholder: 'Select a category and type a location...',
   };
 
 
   const myStyles = {
-    // autocompleteItemActive: { color: 'blue' } // hover color of item
+    autocompleteItemActive: { color: '#aa66cc' } // hover color of item
   };
 
   return (

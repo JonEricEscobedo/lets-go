@@ -127,7 +127,7 @@ class App extends React.Component {
       position: place.geometry.location
     });
 
-    google.maps.event.addListener(marker, 'click', function() {
+    google.maps.event.addListener(marker, 'mouseover', function() {
       context.infowindow.setContent(place.name);
       context.infowindow.open(context.map, this);
       context.setState({highlight: place.id});
@@ -139,7 +139,7 @@ class App extends React.Component {
   // Open Google Map info window when location on list is selected
   openWindow(id) {
     let context = this;
-    google.maps.event.trigger(context.markers[id], 'click');
+    google.maps.event.trigger(context.markers[id], 'mouseover');
   } // End of openWindow
 
   render() {
@@ -161,7 +161,7 @@ class App extends React.Component {
         </nav>
 
         <section className="">
-          {this.state.loading ? <div><i className="fa fa-spinner fa-pulse fa-3x fa-fw Demo__spinner" /></div> : null}
+          {this.state.loading ? <div><i className="fa fa-spinner fa-pulse fa-3x fa-fw loading-spinner" /></div> : null}
           {!this.state.loading && this.state.coordinates ?
             <Dashboard 
               results={this.state.results}
