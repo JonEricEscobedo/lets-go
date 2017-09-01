@@ -68,7 +68,7 @@ class App extends React.Component {
   }
 
   getPlacesResults(results, status) {
-    // console.log(results);
+    console.log(results);
     let context = this;
     this.setState({ results: results });
         
