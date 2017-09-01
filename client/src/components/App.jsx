@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Search from './Search.jsx';
 import Dashboard from './Dashboard.jsx';
-import GoogleMapReact from 'google-map-react';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
 class App extends React.Component {
@@ -12,31 +11,41 @@ class App extends React.Component {
       address: '',
       results: [],
       markers: [],
+      category: 'restaurant',
       highlight: null,
       coordinates: null
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
-    this.createMapOptions = this.createMapOptions.bind(this);
+    // Search component functions
+    this.handleAddressChange = this.handleAddressChange.bind(this);
+    this.handleAddressSelect = this.handleAddressSelect.bind(this);
+    this.handleCategorySelect = this.handleCategorySelect.bind(this);
+
+    // Google map component functions
     this.getPlacesResults = this.getPlacesResults.bind(this);
-    this.createMarker = this.createMarker.bind(this);
     this.openWindow = this.openWindow.bind(this);
+
+    // Additional Google Map variables used in App.jsx
     this.infowindow = null;
     this.map = null;
     this.markers = [];
   }
 
+  // On component load, create map
+  componentDidMount() {
+    this.initializeMap();
+  }
+
   // Detect text input changes in search box
-  handleChange(address) {
+  handleAddressChange(address) {
     this.setState({
       address,
       coordinates: null
     });
-  } // End of handleChange
+  } // End of handleAddressChange
 
   // Get coordinates for selected location
-  handleSelect(address) {
+  handleAddressSelect(address) {
     this.setState({
       address,
       loading: true
@@ -47,15 +56,21 @@ class App extends React.Component {
       .then(({ lat, lng }) => {
         console.log('Coordinates:', { lat, lng });
         this.setState({ coordinates: [lat, lng]});
-        this.createMapOptions();
+        this.initializeMap();
       })
       .catch((error) => {
         console.log('There was an error with the request', error);
       });
-  } // End of handleSelect
+  } // End of handleAddressSelect
+
+  // Handles category selection
+  handleCategorySelect(type) {
+    this.setState({category: type});
+    console.log(type);
+  } // End of handleCategorySelect
 
   // Build GoogleMap
-  createMapOptions(map) {
+  initializeMap() {
     let context = this;
     let destination = {lat: 37.783052, lng: -122.3932187};
 
@@ -65,7 +80,7 @@ class App extends React.Component {
 
     this.map = new google.maps.Map(document.getElementById('g-map'), {
       center: destination,
-      zoom: 10
+      zoom: 15
     });
 
     this.infowindow = new google.maps.InfoWindow();
@@ -78,14 +93,15 @@ class App extends React.Component {
 
     service.nearbySearch({
       location: destination,
-      radius: 50000,
-      type: ['campground']
+      radius: 500,
+      // type: ['campground']
+      type: [context.state.category]
     }, this.getPlacesResults);
 
     return {
       minZoomOverride: true
     };
-  } // End of createMapOptions
+  } // End of initializeMap
 
   // Get results from places library
   getPlacesResults(results, status) {
@@ -135,19 +151,21 @@ class App extends React.Component {
         <nav>
           <Search 
             address={this.state.address}
-            handleChange={this.handleChange}
-            handleSelect={this.handleSelect}
+            category={this.state.category}
+            handleCategorySelect={this.handleCategorySelect}
+            handleAddressChange={this.handleAddressChange}
+            handleAddressSelect={this.handleAddressSelect}
           />
         </nav>
 
         <section>
           <Dashboard 
-            createMapOptions={this.createMapOptions}
             results={this.state.results}
             highlight={this.state.highlight}
             markers={this.state.markers}
             openWindow={this.openWindow}
             coordinates={this.state.coordinates}
+            className="sticky-map"
           />
         </section>
 

@@ -4,7 +4,7 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 
 const Search = (props) => {
   const AutocompleteItem = ({ formattedSuggestion }) => (
-    <div className="Demo__suggestion-item">
+    <div className="suggestion-item">
       <i className='fa fa-map-marker'/>
       <strong> {formattedSuggestion.mainText}</strong>{' '}
       <small className="text-muted">{formattedSuggestion.secondaryText}</small>
@@ -12,33 +12,43 @@ const Search = (props) => {
   
   const cssClasses = {
     root: 'form-group',
-    input: 'Demo__search-input',
-    autocompleteContainer: 'Demo__autocomplete-container',
+    autocompleteContainer: 'autocomplete-container',
   };
 
   const inputProps = {
     type: 'text',
     value: props.address,
-    onChange: props.handleChange,
+    onChange: props.handleAddressChange,
     autoFocus: true,
     placeholder: 'Where do you want to go?',
+  };
+
+
+  const myStyles = {
+    // autocompleteItemActive: { color: 'blue' } // hover color of item
   };
 
   return (
     <div>
 
-      <div className="row">
+      <nav className="row">
+        <div className="col-sm-4 text-center">
+          <button className="btn btn-outline-primary waves-effect btn-sm" onClick={() => props.handleCategorySelect('restaurant')}>Eat</button>
+          <button className="btn btn-outline-default waves-effect btn-sm" onClick={() => props.handleCategorySelect('bar')}>Drink</button>
+          <button className="btn btn-outline-secondary waves-effect btn-sm" onClick={() => props.handleCategorySelect('atm')}>Find money</button>
+        </div>
         <div className="col-sm-8">
           <PlacesAutocomplete
-            onSelect={props.handleSelect}
-            onEnterKeyDown={props.handleSelect}
+            onSelect={props.handleAddressSelect}
+            onEnterKeyDown={props.handleAddressSelect}
             autocompleteItem={AutocompleteItem}
             classNames={cssClasses}
             inputProps={inputProps}
             googleLogo={true}
+            styles={myStyles}
           />
         </div>
-      </div>
+      </nav>
     
     </div>
   );
