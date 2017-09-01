@@ -1,4 +1,11 @@
 /* ==============================
+ * Main container properties
+ * ============================== */
+.main {
+  min-height: 100vh;
+}
+
+/* ==============================
  * Header properties
  * ============================== */
 
@@ -43,13 +50,27 @@
 }
 
 /* ==============================
- * MOBILE SPECIFIC PARAMS
+ * Footer properties
+ * ============================== */
+
+.font-thinner {
+  font-weight: 200;
+  letter-spacing: 0.2em;
+}
+
+.contact-icons {
+  letter-spacing: 1.5em;
+}
+
+/* ==============================
+ * Mobile specific parametes
  * ============================== */
 @media only screen and (max-width: 768px) {
   .hero {
     font-size: 3.5em;
     text-align: center;
   }
+
   .sticky-map {
     position: relative !important;
   }
@@ -57,6 +78,11 @@
   #g-map {
     height: 50vh;
     width: 90vw;
+  }
+
+  .footer {
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 }
 

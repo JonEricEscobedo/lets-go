@@ -144,37 +144,46 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div>
+        <div className="container main">
+          <header>
+            <h1 className="display-1 hero font-thinner">LET'S GO</h1>
+          </header>
 
-        <header>
-          <h1 className="display-1 hero">LET'S GO</h1>
-        </header>
-
-        <nav>
-          <Search 
-            address={this.state.address}
-            category={this.state.category}
-            handleCategorySelect={this.handleCategorySelect}
-            handleAddressChange={this.handleAddressChange}
-            handleAddressSelect={this.handleAddressSelect}
-          />
-        </nav>
-
-        <section className="">
-          {this.state.loading ? <div><i className="fa fa-spinner fa-pulse fa-3x fa-fw loading-spinner" /></div> : null}
-          {!this.state.loading && this.state.coordinates ?
-            <Dashboard 
-              results={this.state.results}
-              highlight={this.state.highlight}
-              markers={this.state.markers}
-              openWindow={this.openWindow}
-              coordinates={this.state.coordinates}
-              className="sticky-map"
+          <nav>
+            <Search 
+              address={this.state.address}
+              category={this.state.category}
+              handleCategorySelect={this.handleCategorySelect}
+              handleAddressChange={this.handleAddressChange}
+              handleAddressSelect={this.handleAddressSelect}
             />
-            : null}
-        </section>
+          </nav>
 
-        <footer>
+          <section className="">
+            {this.state.loading ? <div><i className="fa fa-spinner fa-pulse fa-3x fa-fw loading-spinner" /></div> : null}
+            {!this.state.loading && this.state.coordinates ?
+              <Dashboard 
+                results={this.state.results}
+                highlight={this.state.highlight}
+                markers={this.state.markers}
+                openWindow={this.openWindow}
+                coordinates={this.state.coordinates}
+                className="sticky-map"
+              />
+              : null}
+          </section>
+        </div>
+
+        <footer className="footer">
+          <div className="container text-right">
+            <span className="custom-font font-thinner">Coded by Jon Eric Escobedo</span>
+            <div className="contact-icons">
+              <a target="_blank" href="https://www.linkedin.com/in/jonericescobedo/"><i className="fa fa-linkedin-square fa-2x" aria-hidden="true"></i></a>
+              <a href="mailto:jonericescobedo@gmail.com"><i className="fa fa-envelope fa-2x" aria-hidden="true"></i></a>
+              <a target="_blank" href="https://github.com/JonEricEscobedo"><i className="fa fa-github fa-2x" aria-hidden="true"></i></a>
+            </div>
+          </div>
         </footer>
 
       </div>
