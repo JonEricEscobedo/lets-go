@@ -11,7 +11,7 @@ and type the address or city that you're currently at or want to head out to and
 ## Developer
 - [Jon Eric Escobedo](https://www.linkedin.com/in/jonericescobedo/)
 
-##Developer Notes
+## Developer Notes
 This application heavily utilizes the Google Maps API + Places Library, react-places-autocomplete (a sweet React component that provides autocomplete functionality - link below).
 
 Features:
@@ -26,11 +26,11 @@ Tricky Parts:
  - Passing state to get list entries to highlight when hovering over a pin
 
 ## To Run
-####Deployed Demo
+#### Deployed Demo
 Deployed on Heroku: [lets-go-app](https://lets-go-app.herokuapp.com)
 #### Animated GIF Demo
 [GIF Demo](http://recordit.co/JUw9Cuh6tE)
-####GitHub
+#### GitHub
 Clone the repo down to the directory of your choice. Then type:
 ```
 npm install
@@ -44,8 +44,6 @@ npm run react-dev
 ```
 npm run sever-dev
 ```
-####Zip file
-
 
 ## Tech Stack
 - React
