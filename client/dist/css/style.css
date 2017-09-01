@@ -8,7 +8,12 @@
 }
 
 .sticky-map {
-  z-index: -10;
+  position: fixed !important;
+}
+
+#g-map {
+  height: 50vh;
+  width: 50vw;
 }
 
 .autocomplete-container {
@@ -36,6 +41,10 @@
 @media only screen and (max-width: 768px) {
   .hero {
     font-size: 3.5em;
+    text-align: center;
+  }
+  .sticky-map {
+    position: relative !important;
   }
 }
 

@@ -7,18 +7,19 @@ const Dashboard = (props) => {
   return (
     <div className="row">
         
-      <section className="col-sm-8"> 
-        <GoogleMap />
-      </section>
-
-      <aside className="col-sm-4">
+      <section className="col-sm-4">
         <PlacesList 
           results={props.results}
           highlight={props.highlight}
           markers={props.markers}
           openWindow={props.openWindow}
         />
+      </section>
+
+      <aside className="col-sm-8"> 
+        <GoogleMap />
       </aside>
+
 
     </div>
   );

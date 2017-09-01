@@ -160,7 +160,7 @@ class App extends React.Component {
           />
         </nav>
 
-        <section>
+        <section className="">
           {this.state.loading ? <div><i className="fa fa-spinner fa-pulse fa-3x fa-fw Demo__spinner" /></div> : null}
           {!this.state.loading && this.state.coordinates ?
             <Dashboard 
