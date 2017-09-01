@@ -21,7 +21,12 @@ const ListingsEntries = (props) => {
       >
         <div className="d-flex w-100 justify-content-between">
           <h5 className="mb-1">{props.result.name}</h5>
-          { props.result.opening_hours ? (props.result.opening_hours.open_now ? <small>Open now</small> : <small>Closed</small>) : <small></small> }
+          { props.result.opening_hours ? 
+            (props.result.opening_hours.open_now ? 
+              <small>Open now</small> 
+              : <small>Closed</small>) 
+            : <small></small> 
+          }
         </div>
         <p className="mb-1">{props.result.vicinity}</p>
         <small><img src={props.result.icon} style={styles.icon}/></small>

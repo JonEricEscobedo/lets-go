@@ -9,8 +9,8 @@ const Listings = (props) => {
   return (
     <div>
       <div className="list-group">
-        { loading 
-          ? <li className="list-group-item">Loading</li>
+        { loading ? 
+          <li className="list-group-item">Loading</li>
           : <div>{props.results.map((result, idx) => {
             return (
               <PlacesListEntry 
@@ -22,8 +22,7 @@ const Listings = (props) => {
                 key={idx} 
               />
             );
-          })}
-          </div>
+          })}</div>
         }
       </div>
     </div>

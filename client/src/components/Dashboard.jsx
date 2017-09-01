@@ -6,7 +6,8 @@ import PlacesList from './PlacesList.jsx';
 const Dashboard = (props) => {
   return (
     <div className="row">
-        
+      
+      {/* PlacesList component */}
       <section className="col-sm-4">
         <PlacesList 
           results={props.results}
@@ -16,10 +17,10 @@ const Dashboard = (props) => {
         />
       </section>
 
+      {/* GoogleMap component */}
       <aside className="col-sm-8"> 
         <GoogleMap />
       </aside>
-
 
     </div>
   );

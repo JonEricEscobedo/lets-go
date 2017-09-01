@@ -96,7 +96,6 @@ class App extends React.Component {
     service.nearbySearch({
       location: destination,
       radius: 500,
-      // type: ['campground']
       type: [context.state.category]
     }, this.getPlacesResults);
 
@@ -145,6 +144,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
+
+        {/* Header */}
         <header className="gradient">
           <div className="container">
             <h1 className="display-1 hero font-thinner">LET'S GO</h1>
@@ -152,6 +153,8 @@ class App extends React.Component {
         </header>
 
         <div className="container main">
+
+          {/* Navigation */}
           <nav>
             <Search 
               address={this.state.address}
@@ -162,8 +165,14 @@ class App extends React.Component {
             />
           </nav>
 
-          <section className="">
-            {this.state.loading ? <div><i className="fa fa-spinner fa-pulse fa-3x fa-fw loading-spinner" /></div> : null}
+          {/* Dashboard: List and Map */}
+          <section>
+            {this.state.loading ?
+              <div>
+                <i className="fa fa-spinner fa-pulse fa-3x fa-fw loading-spinner" />
+              </div> 
+              : null
+            }
             {!this.state.loading && this.state.coordinates ?
               <Dashboard 
                 results={this.state.results}
@@ -173,10 +182,12 @@ class App extends React.Component {
                 coordinates={this.state.coordinates}
                 className="sticky-map"
               />
-              : null}
+              : null
+            }
           </section>
         </div>
 
+        {/* Footer */}
         <footer className="footer">
           <div className="container text-right">
             <span className="custom-font font-thinner">Coded by Jon Eric Escobedo</span>
