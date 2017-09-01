@@ -15,10 +15,10 @@ const GoogleMap = (props) => {
 
   return (
     <div>
-      <div style={styles.map} id="test">
+      <div style={styles.map} id="g-map">
         <GoogleMapReact
           center={styles.center}
-          defaultZoom={5}
+          zoom={5}
           options={props.createMapOptions}
         />
       </div>

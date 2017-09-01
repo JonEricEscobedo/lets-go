@@ -63,7 +63,7 @@ class App extends React.Component {
       destination = {lat: this.state.coordinates[0], lng: this.state.coordinates[1]};
     }
 
-    this.map = new google.maps.Map(document.getElementById('test'), {
+    this.map = new google.maps.Map(document.getElementById('g-map'), {
       center: destination,
       zoom: 10
     });
@@ -81,6 +81,10 @@ class App extends React.Component {
       radius: 50000,
       type: ['campground']
     }, this.getPlacesResults);
+
+    return {
+      minZoomOverride: true
+    };
   } // End of createMapOptions
 
   // Get results from places library

@@ -8,21 +8,21 @@ const Search = (props) => {
       <i className='fa fa-map-marker'/>
       <strong> {formattedSuggestion.mainText}</strong>{' '}
       <small className="text-muted">{formattedSuggestion.secondaryText}</small>
-    </div>)
+    </div>);
   
   const cssClasses = {
     root: 'form-group',
     input: 'Demo__search-input',
     autocompleteContainer: 'Demo__autocomplete-container',
-  }
+  };
 
   const inputProps = {
-    type: "text",
+    type: 'text',
     value: props.address,
     onChange: props.handleChange,
     autoFocus: true,
-    placeholder: "Where do you want to go?",
-  }
+    placeholder: 'Where do you want to go?',
+  };
 
   return (
     <div>
@@ -35,12 +35,13 @@ const Search = (props) => {
             autocompleteItem={AutocompleteItem}
             classNames={cssClasses}
             inputProps={inputProps}
+            googleLogo={true}
           />
         </div>
       </div>
     
     </div>
   );
-}
+};
 
 export default Search;
