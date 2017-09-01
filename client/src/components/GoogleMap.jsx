@@ -11,20 +11,20 @@ const GoogleMap = (props) => {
       lat: 37.7749,
       lng: -122.42,
     }
-  }
+  };
 
   return (
     <div>
       <div style={styles.map} id="test">
         <GoogleMapReact
           center={styles.center}
-          defaultZoom={11}
+          defaultZoom={5}
           options={props.createMapOptions}
         />
       </div>
     </div>
   );
   
-}
+};
 
 export default GoogleMap;

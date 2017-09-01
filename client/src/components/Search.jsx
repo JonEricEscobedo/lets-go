@@ -1,32 +1,46 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
-class Search extends React.Component {
-  constructor(props) {
-    super(props);
+const Search = (props) => {
+  const AutocompleteItem = ({ formattedSuggestion }) => (
+    <div className="Demo__suggestion-item">
+      <i className='fa fa-map-marker'/>
+      <strong> {formattedSuggestion.mainText}</strong>{' '}
+      <small className="text-muted">{formattedSuggestion.secondaryText}</small>
+    </div>)
+  
+  const cssClasses = {
+    root: 'form-group',
+    input: 'Demo__search-input',
+    autocompleteContainer: 'Demo__autocomplete-container',
   }
 
+  const inputProps = {
+    type: "text",
+    value: props.address,
+    onChange: props.handleChange,
+    autoFocus: true,
+    placeholder: "Where do you want to go?",
+  }
 
+  return (
+    <div>
 
-  render() {
-    return (
-      <div>
-
-        <div className="row">
-          <div className="col-sm-6">
-            <div className="md-form">
-                <input type="text" id="location-search" className="form-control" value={this.props.query} onChange={this.props.handleChange} />
-                <label htmlFor="location-search" className="">Where do you want to go?</label>
-            </div>
-          </div>
-          <div className="col-sm-2 text-center">
-            <button type="button" className="btn btn-default" onClick={this.props.submitQuery}>Find!</button>
-          </div>
+      <div className="row">
+        <div className="col-sm-8">
+          <PlacesAutocomplete
+            onSelect={props.handleSelect}
+            onEnterKeyDown={props.handleSelect}
+            autocompleteItem={AutocompleteItem}
+            classNames={cssClasses}
+            inputProps={inputProps}
+          />
         </div>
-
       </div>
-    );
-  }
+    
+    </div>
+  );
 }
 
 export default Search;

@@ -3,21 +3,21 @@ import ReactDOM from 'react-dom';
 import Search from './Search.jsx';
 import Dashboard from './Dashboard.jsx';
 import GoogleMapReact from 'google-map-react';
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: '',
+      address: '',
       results: [],
       markers: [],
-      highlight: null
-    }
+      highlight: null,
+      coordinates: null
+    };
 
     this.handleChange = this.handleChange.bind(this);
-    this.submitQuery = this.submitQuery.bind(this);
-    this.fetchPlaces = this.fetchPlaces.bind(this);
-
+    this.handleSelect = this.handleSelect.bind(this);
     this.createMapOptions = this.createMapOptions.bind(this);
     this.getPlacesResults = this.getPlacesResults.bind(this);
     this.createMarker = this.createMarker.bind(this);
@@ -27,29 +27,45 @@ class App extends React.Component {
     this.markers = [];
   }
 
-  // Detects input in text box
-  handleChange(event) {
-    this.setState( {query: event.target.value} );
-  }
+  // Detect text input changes in search box
+  handleChange(address) {
+    this.setState({
+      address,
+      coordinates: null
+    });
+  } // End of handleChange
 
-  // Submits query
-  submitQuery() {
-    this.fetchPlaces();
-    this.setState( {query: ''} );
-  }
+  // Get coordinates for selected location
+  handleSelect(address) {
+    this.setState({
+      address,
+      loading: true
+    });
 
-  // Google Places External API
-  fetchPlaces() {
-    console.log(this.state.query);
-  }
+    geocodeByAddress(address)
+      .then((results) => getLatLng(results[0]))
+      .then(({ lat, lng }) => {
+        console.log('Coordinates:', { lat, lng });
+        this.setState({ coordinates: [lat, lng]});
+        this.createMapOptions();
+      })
+      .catch((error) => {
+        console.log('There was an error with the request', error);
+      });
+  } // End of handleSelect
 
+  // Build GoogleMap
   createMapOptions(map) {
     let context = this;
-    let destination = {lat: 37.7749, lng: -122.42};
+    let destination = {lat: 37.783052, lng: -122.3932187};
+
+    if (this.state.coordinates) {
+      destination = {lat: this.state.coordinates[0], lng: this.state.coordinates[1]};
+    }
 
     this.map = new google.maps.Map(document.getElementById('test'), {
       center: destination,
-      zoom: 15
+      zoom: 10
     });
 
     this.infowindow = new google.maps.InfoWindow();
@@ -62,25 +78,25 @@ class App extends React.Component {
 
     service.nearbySearch({
       location: destination,
-      radius: 500,
-      type: ['store']
+      radius: 50000,
+      type: ['campground']
     }, this.getPlacesResults);
-  }
+  } // End of createMapOptions
 
+  // Get results from places library
   getPlacesResults(results, status) {
-    console.log(results);
     let context = this;
     this.setState({ results: results });
-        
+    this.markers = [];
     if (status === google.maps.places.PlacesServiceStatus.OK) {
       for (let i = 0; i < results.length; i++) {
         this.createMarker(results[i]);
       }
       this.setState({markers: context.markers});
-      // console.log('END!', this.state.markers)
     }
-  }
+  } // End of getPlacesResults
 
+  // Create map pins for results
   createMarker(place) {
     let context = this;
     let placeLoc = place.geometry.location;
@@ -96,12 +112,13 @@ class App extends React.Component {
     });
 
     this.markers.push(marker);
-  }
+  } // End of createMarker
 
+  // Open Google Map info window when location on list is selected
   openWindow(id) {
-    let context = this
+    let context = this;
     google.maps.event.trigger(context.markers[id], 'click');
-  }
+  } // End of openWindow
 
   render() {
     return (
@@ -113,9 +130,9 @@ class App extends React.Component {
 
         <nav>
           <Search 
-            query={this.state.query}
+            address={this.state.address}
             handleChange={this.handleChange}
-            submitQuery={this.submitQuery}
+            handleSelect={this.handleSelect}
           />
         </nav>
 
@@ -126,6 +143,7 @@ class App extends React.Component {
             highlight={this.state.highlight}
             markers={this.state.markers}
             openWindow={this.openWindow}
+            coordinates={this.state.coordinates}
           />
         </section>
 

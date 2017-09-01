@@ -25,6 +25,6 @@ const Dashboard = (props) => {
 
     </div>
   );
-}
+};
 
 export default Dashboard;
